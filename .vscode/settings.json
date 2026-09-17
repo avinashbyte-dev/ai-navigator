@@ -1,0 +1,14 @@
+{
+    "liveServer.settings.ignoreFiles": [
+        "**/*.db*",
+        "**/*.sqlite*",
+        "backend/**",
+        ".git/**"
+    ],
+    "python.analysis.extraPaths": [
+        "./backend"
+    ],
+    "python.autoComplete.extraPaths": [
+        "./backend"
+    ]
+}

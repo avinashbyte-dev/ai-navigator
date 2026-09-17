@@ -1,0 +1,54 @@
+<!-- History Page Fragment -->
+
+<h1 class="page-title">Search History</h1>
+<p class="section-subheading">
+    Your recent AI tool searches and recommendations. Click any item to reopen the results.
+</p>
+
+<!-- History Controls -->
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h3 class="card-title">Recent Searches</h3>
+            <p class="card-subtitle" id="history-count-label">0 searches recorded</p>
+        </div>
+        <button class="btn btn-sm btn-ghost" id="btn-clear-history">
+            Clear All
+        </button>
+    </div>
+
+    <div class="history-list" id="history-list">
+
+        <!-- Populated by JavaScript -->
+        <div class="empty-state" id="history-empty">
+            <h3>No search history yet</h3>
+            <p>Your searches will appear here once you start using AI Navigator.</p>
+            <div class="card-actions">
+                <button class="btn btn-primary" id="btn-history-start">
+                    Start Your First Search
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- History Detail Preview (hidden by default, shown when a history item is clicked) -->
+<div class="card hidden" id="history-detail-preview">
+    <div class="card-header">
+        <div>
+            <h3 class="card-title" id="history-detail-title">Previous Search</h3>
+            <p class="card-subtitle" id="history-detail-date">--</p>
+        </div>
+        <button class="btn btn-sm btn-ghost" id="btn-close-detail">
+            Close
+        </button>
+    </div>
+    <p class="text-secondary" id="history-detail-query">--</p>
+    <div class="tag-row" id="history-detail-tags"></div>
+    <div class="card-actions">
+        <button class="btn btn-primary" id="btn-reopen-search">
+            Reopen Full Results
+        </button>
+    </div>
+</div>

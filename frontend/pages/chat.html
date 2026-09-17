@@ -1,0 +1,117 @@
+<!-- Chat Page Fragment -->
+
+<h1 class="page-title">AI Interaction</h1>
+
+<!-- API Availability Notice -->
+<div class="card" id="chat-availability-notice">
+    <div class="chat-notice-row">
+        <div class="chat-status-dot online"></div>
+        <div>
+            <h3 class="card-title" id="chat-tool-heading">Chat with AI Tool</h3>
+            <p class="card-subtitle" id="chat-tool-status">
+                Connected via official API. Your messages are sent securely through our backend.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Offline / No API Fallback -->
+<div class="card hidden" id="chat-offline-notice">
+    <div class="chat-notice-row">
+        <div class="chat-status-dot offline"></div>
+        <div>
+            <h3 class="card-title">Direct Interaction Unavailable</h3>
+            <p class="text-secondary card-subtitle">
+                This AI tool does not currently offer a public API integration that AI Navigator
+                can connect to. You can visit the official website to use this tool directly.
+            </p>
+            <div class="card-actions">
+                <a href="#" class="btn btn-primary" id="chat-official-link" target="_blank" rel="noopener noreferrer">
+                    Open Official Website
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chat Layout -->
+<div class="chat-layout" id="chat-layout">
+
+    <div class="chat-header-bar">
+        <div class="chat-header-left">
+            <h3 class="chat-ai-name" id="chat-ai-display-name">AI Tool</h3>
+            <span class="chat-ai-badge" id="chat-ai-provider-badge">Provider</span>
+        </div>
+        <div class="chat-header-right">
+            <span class="text-muted" id="chat-model-label">Model: --</span>
+            <button class="btn btn-sm btn-ghost" id="btn-clear-chat">Clear Chat</button>
+        </div>
+    </div>
+
+    <div class="chat-messages" id="chat-messages">
+        <div class="chat-msg ai">
+            <p>Hello. I am connected through AI Navigator. How can I help you today?</p>
+        </div>
+    </div>
+
+    <div class="chat-typing-wrap hidden" id="chat-typing-indicator">
+        <div class="chat-msg ai">
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-input-bar">
+        <input
+            type="text"
+            class="chat-input"
+            id="chat-input"
+            placeholder="Type your message..."
+            autocomplete="off"
+        >
+        <button class="btn btn-primary" id="chat-send-btn">Send</button>
+    </div>
+
+</div>
+
+<!-- Session Info -->
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Session Information</h3>
+    </div>
+    <div class="session-info-grid">
+        <div class="session-info-item">
+            <span class="text-muted">Tool</span>
+            <p id="chat-info-tool">--</p>
+        </div>
+        <div class="session-info-item">
+            <span class="text-muted">Provider</span>
+            <p id="chat-info-provider">--</p>
+        </div>
+        <div class="session-info-item">
+            <span class="text-muted">Messages Sent</span>
+            <p id="chat-info-msg-count">0</p>
+        </div>
+        <div class="session-info-item">
+            <span class="text-muted">API Status</span>
+            <p id="chat-info-api-status" class="text-success">Active</p>
+        </div>
+    </div>
+    <p class="card-disclaimer">
+        All API calls are routed through the AI Navigator backend. Your API keys are never
+        exposed to the browser. Conversations are not stored unless you are logged in and
+        have history saving enabled.
+    </p>
+</div>class="text-muted">API Status</span>
+            <p id="chat-info-api-status" class="text-success" style="font-weight: 600;">Active</p>
+        </div>
+    </div>
+    <p style="margin-top: var(--space-md); font-size: var(--font-size-xs); color: var(--color-text-muted); line-height: 1.5;">
+        All API calls are routed through the AI Navigator backend. Your API keys are never
+        exposed to the browser. Conversations are not stored unless you are logged in and
+        have history saving enabled.
+    </p>
+</div>

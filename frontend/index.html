@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Navigator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#home" class="nav-brand" data-page="home">AI Navigator</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="home.html" data-page="home" class="nav-link active">Home</a></li>
+                <li><a href="dashboard.html" data-page="dashboard" class="nav-link">Dashboard</a></li>
+                <li><a href="compare.html" data-page="compare" class="nav-link">Compare</a></li>
+                <li><a href="history.html" data-page="history" class="nav-link">History</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#login" data-page="login" class="btn btn-ghost">Log In</a>
+                <a href="#signup" data-page="signup" class="btn btn-primary">Sign Up</a>
+            </div>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Home Page) -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-heading">
+                Find the Right AI for<br>
+                <span class="text-gradient">What You Want to Do</span>
+            </h1>
+            <p class="hero-description">
+                Thousands of AI tools exist. One intelligent recommendation
+                is all you need. Describe your goal and we will match you
+                with the best AI for the job.
+            </p>
+
+            <div class="search-box">
+                <textarea
+                    id="search-input"
+                    class="search-textarea"
+                    placeholder="What do you want to accomplish? For example: Create a cinematic video, Learn Python, Analyze my research paper..."
+                    rows="2"
+                ></textarea>
+                <button id="search-btn" class="btn btn-primary btn-lg">
+                    Find My AI
+                </button>
+            </div>
+
+            <div class="prompt-suggestions">
+                <span class="prompt-label">Try:</span>
+                <button class="prompt-chip" data-prompt="Help me code in Python">Code in Python</button>
+                <button class="prompt-chip" data-prompt="Create a cinematic video">Cinematic Video</button>
+                <button class="prompt-chip" data-prompt="Analyze my research paper">Research Paper</button>
+                <button class="prompt-chip" data-prompt="Make a college presentation">Presentation</button>
+                <button class="prompt-chip" data-prompt="Generate social media content">Social Media</button>
+                <button class="prompt-chip" data-prompt="Analyze my data">Data Analysis</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Page Content Area -->
+    <main id="page-content" class="page-content hidden">
+        <!-- Page fragments load here via JavaScript -->
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>AI Navigator</h3>
+                <p>The intelligent AI discovery and recommendation platform.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <a href="#home" data-page="home">Home</a>
+                    <a href="#dashboard" data-page="dashboard">Dashboard</a>
+                    <a href="#compare" data-page="compare">Compare Tools</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="#login" data-page="login">Log In</a>
+                    <a href="#signup" data-page="signup">Sign Up</a>
+                    <a href="#history" data-page="history">History</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>AI Navigator. Recommendations are AI-generated estimates. Always verify details on official websites.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>

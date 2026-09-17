@@ -1,0 +1,63 @@
+<!-- Compare Page Fragment -->
+
+<h1 class="page-title">Compare AI Tools</h1>
+<p class="section-subheading">
+    Select up to 4 AI tools to compare side by side. Data is based on publicly available information and may change over time.
+</p>
+
+<!-- Tool Selector -->
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h3 class="card-title">Select Tools to Compare</h3>
+            <p class="card-subtitle">Choose 2 to 4 tools from your recommendations or search results</p>
+        </div>
+    </div>
+
+    <div class="compare-selector-grid" id="compare-tool-options">
+        <div class="empty-state">
+            <h3>No tools available for comparison</h3>
+            <p>Run a search first to generate recommendations, then return here to compare.</p>
+        </div>
+    </div>
+
+    <div class="card-actions">
+        <button class="btn btn-primary" id="btn-run-compare">Compare Selected</button>
+        <span class="text-muted" id="compare-count-label">0 of 4 selected</span>
+    </div>
+</div>
+
+<!-- Comparison Results -->
+<div id="compare-results" class="hidden">
+
+    <h2 class="section-heading">Comparison Results</h2>
+
+    <div class="comparison-wrapper">
+        <table class="comparison-table" id="compare-table">
+            <thead>
+                <tr id="compare-table-head">
+                    <th>Feature</th>
+                </tr>
+            </thead>
+            <tbody id="compare-table-body"></tbody>
+        </table>
+    </div>
+
+    <h2 class="section-heading">Detailed Breakdown</h2>
+    <div class="compare-detail-grid" id="compare-detail-cards"></div>
+
+    <div class="card">
+        <h3 class="card-title">Summary</h3>
+        <div id="compare-summary" class="text-secondary"></div>
+        <p class="card-disclaimer">
+            This comparison is AI-generated based on publicly available data. Ratings are approximate
+            and should not be treated as definitive evaluations. Always check official sources for
+            the most current information.
+        </p>
+    </div>
+
+    <div class="card-actions">
+        <button class="btn btn-ghost" id="btn-reset-compare">Start New Comparison</button>
+        <button class="btn btn-outline" id="btn-back-dashboard">Back to Recommendations</button>
+    </div>
+</div>

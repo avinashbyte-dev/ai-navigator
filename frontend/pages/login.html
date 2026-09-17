@@ -1,0 +1,61 @@
+<!-- Login Page Fragment -->
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-subtitle">Log in to access your saved recommendations and history.</p>
+
+        <form id="login-form" autocomplete="on">
+
+            <div class="form-group">
+                <label for="login-email" class="form-label">Email Address</label>
+                <input
+                    type="email"
+                    id="login-email"
+                    class="form-input"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="login-password" class="form-label">Password</label>
+                <input
+                    type="password"
+                    id="login-password"
+                    class="form-input"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+            <div class="form-group auth-options">
+                <label class="auth-checkbox">
+                    <input type="checkbox" id="login-remember">
+                    <span>Remember me</span>
+                </label>
+                <a href="#" class="auth-link-inline" id="login-forgot">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block" id="login-submit">
+                Log In
+            </button>
+
+            <div class="auth-divider">
+                <span>or</span>
+            </div>
+
+            <button type="button" class="btn btn-ghost btn-block" id="login-guest">
+                Continue as Guest
+            </button>
+
+        </form>
+
+        <p class="auth-footer">
+            Do not have an account?
+            <a href="#signup" data-page="signup">Create one</a>
+        </p>
+    </div>
+</div>

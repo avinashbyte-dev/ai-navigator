@@ -1,0 +1,78 @@
+<!-- Signup Page Fragment -->
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h2 class="auth-title">Create Your Account</h2>
+        <p class="auth-subtitle">Sign up to save recommendations, track history, and personalize your AI suggestions.</p>
+
+        <form id="signup-form" autocomplete="on">
+
+            <div class="form-group">
+                <label for="signup-name" class="form-label">Full Name</label>
+                <input
+                    type="text"
+                    id="signup-name"
+                    class="form-input"
+                    placeholder="Your full name"
+                    autocomplete="name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="signup-email" class="form-label">Email Address</label>
+                <input
+                    type="email"
+                    id="signup-email"
+                    class="form-input"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="signup-password" class="form-label">Password</label>
+                <input
+                    type="password"
+                    id="signup-password"
+                    class="form-input"
+                    placeholder="At least 8 characters"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="signup-confirm" class="form-label">Confirm Password</label>
+                <input
+                    type="password"
+                    id="signup-confirm"
+                    class="form-input"
+                    placeholder="Re-enter your password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label class="auth-checkbox">
+                    <input type="checkbox" id="signup-terms" required>
+                    <span>I agree to the <a href="#" class="auth-link-inline">Terms of Service</a> and <a href="#" class="auth-link-inline">Privacy Policy</a></span>
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block" id="signup-submit">
+                Create Account
+            </button>
+
+        </form>
+
+        <p class="auth-footer">
+            Already have an account?
+            <a href="#login" data-page="login">Log in</a>
+        </p>
+    </div>
+</div>

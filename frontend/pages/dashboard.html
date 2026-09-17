@@ -1,0 +1,126 @@
+<!-- Dashboard Page Fragment -->
+
+<h1 class="page-title">Your Recommendation</h1>
+
+<!-- Query Summary -->
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h3 class="card-title">Your Requirement</h3>
+            <p class="card-subtitle">What you told us you want to accomplish</p>
+        </div>
+    </div>
+    <p id="dash-query-text" class="text-secondary">Loading your query...</p>
+</div>
+
+<!-- Detected Intent -->
+<div class="card">
+    <div class="card-header">
+        <div>
+            <h3 class="card-title">Detected Intent</h3>
+            <p class="card-subtitle">How our system understood your request</p>
+        </div>
+    </div>
+    <div class="intent-grid">
+        <div class="intent-item">
+            <span class="intent-label">Category</span>
+            <span class="intent-value" id="intent-category">--</span>
+        </div>
+        <div class="intent-item">
+            <span class="intent-label">Purpose</span>
+            <span class="intent-value" id="intent-purpose">--</span>
+        </div>
+        <div class="intent-item">
+            <span class="intent-label">Skill Level</span>
+            <span class="intent-value" id="intent-skill">--</span>
+        </div>
+        <div class="intent-item">
+            <span class="intent-label">Budget</span>
+            <span class="intent-value" id="intent-budget">--</span>
+        </div>
+        <div class="intent-item">
+            <span class="intent-label">Output Type</span>
+            <span class="intent-value" id="intent-output">--</span>
+        </div>
+        <div class="intent-item">
+            <span class="intent-label">Priority</span>
+            <span class="intent-value" id="intent-priority">--</span>
+        </div>
+    </div>
+</div>
+
+<!-- Best Match -->
+<div class="card card-best-match">
+    <div class="card-header">
+        <div>
+            <h3 class="card-title" id="best-match-name">AI Tool Name</h3>
+            <p class="card-subtitle" id="best-match-tagline">Loading...</p>
+        </div>
+        <div class="match-score" id="best-match-score">--%</div>
+    </div>
+
+    <div class="match-score-bar">
+        <div class="match-score-fill" id="best-match-bar"></div>
+    </div>
+
+    <div class="tag-row">
+        <span class="tag" id="best-match-category-tag">Category</span>
+        <span class="tag tag-free" id="best-match-pricing-tag">Free</span>
+    </div>
+
+    <h4 class="card-section-title">Score Breakdown</h4>
+    <div class="score-breakdown">
+        <div class="score-row">
+            <span class="score-label">Task Compatibility</span>
+            <span class="score-value" id="score-task">--%</span>
+        </div>
+        <div class="score-row">
+            <span class="score-label">Capability Match</span>
+            <span class="score-value" id="score-capability">--%</span>
+        </div>
+        <div class="score-row">
+            <span class="score-label">Skill Compatibility</span>
+            <span class="score-value" id="score-skill">--%</span>
+        </div>
+        <div class="score-row">
+            <span class="score-label">Budget Fit</span>
+            <span class="score-value" id="score-budget">--%</span>
+        </div>
+        <div class="score-row">
+            <span class="score-label">Ease of Use</span>
+            <span class="score-value" id="score-ease">--%</span>
+        </div>
+    </div>
+
+    <h4 class="card-section-title">Why We Recommend This</h4>
+    <div class="reason-list" id="best-match-reasons">
+        <div class="reason-item positive">Loading recommendations...</div>
+    </div>
+
+    <h4 class="card-section-title">Possible Limitations</h4>
+    <div class="reason-list" id="best-match-limitations">
+        <div class="reason-item warning">Loading...</div>
+    </div>
+
+    <p class="card-disclaimer">
+        This match score is an AI-generated estimate based on your stated requirements.
+        It is not an absolute measure of quality. Pricing and availability may change.
+        Always verify details on the official website.
+    </p>
+
+    <div class="card-actions">
+        <button class="btn btn-primary btn-lg" id="btn-use-ai">Use This AI</button>
+        <button class="btn btn-outline" id="btn-visit-official">Visit Official Website</button>
+        <button class="btn btn-ghost" id="btn-compare">Compare With Alternatives</button>
+    </div>
+</div>
+
+<h2 class="section-heading">Alternatives</h2>
+<p class="section-subheading">Other AI tools that may also fit your needs</p>
+
+<div class="alternatives-grid" id="dash-alternatives">
+    <div class="empty-state">
+        <h3>No alternatives loaded</h3>
+        <p>Run a search to see alternative AI tool recommendations.</p>
+    </div>
+</div>
