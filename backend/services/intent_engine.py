@@ -12,7 +12,10 @@ from schemas.search_schema import DetectedIntent
 
 logger = logging.getLogger(__name__)
 
-client: Optional[OpenAI] = OpenAI(api_key=settings.OPENAI_API_KEY) if settings.OPENAI_API_KEY else None
+def _is_valid_api_key(key: str) -> bool:
+    return bool(key and key.strip() and not key.startswith("sk-your-") and len(key) > 20)
+
+client: Optional[OpenAI] = OpenAI(api_key=settings.OPENAI_API_KEY) if _is_valid_api_key(settings.OPENAI_API_KEY) else None
 
 KEYWORD_MAP = {
     "coding": ["code", "coding", "program", "programming", "python", "javascript", "typescript", "java", "c++", "rust", "html", "css", "sql", "debug", "developer", "software", "app development", "learn to code", "practice coding", "algorithm", "git", "backend", "frontend"],

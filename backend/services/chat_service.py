@@ -12,8 +12,11 @@ from schemas.chat_schema import ChatMessage, ChatResponse
 
 logger = logging.getLogger(__name__)
 
-# Initialize OpenAI client if key is present
-client: Optional[OpenAI] = OpenAI(api_key=settings.OPENAI_API_KEY) if settings.OPENAI_API_KEY else None
+def _is_valid_api_key(key: str) -> bool:
+    return bool(key and key.strip() and not key.startswith("sk-your-") and len(key) > 20)
+
+# Initialize OpenAI client only if a real key is present
+client: Optional[OpenAI] = OpenAI(api_key=settings.OPENAI_API_KEY) if _is_valid_api_key(settings.OPENAI_API_KEY) else None
 
 
 async def execute_chat(
@@ -61,8 +64,7 @@ async def execute_chat(
                 model_used=selected_model
             )
         except Exception as e:
-            logger.error(f"Error communicating with AI provider API: {e}")
-            raise RuntimeError(f"AI Provider error: {str(e)}")
+            logger.warning(f"Error communicating with AI provider API ({e}). Falling back to simulation mode.")
 
     # Fallback simulation for local development without an active OpenAI API key
     latest_user_msg = next((m.content for m in reversed(messages) if m.role == "user"), "Hello")

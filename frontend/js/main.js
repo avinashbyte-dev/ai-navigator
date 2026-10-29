@@ -2,7 +2,9 @@
    AI NAVIGATOR — Main Application & System Router
    ============================================ */
 
-const API_ROOT = "http://127.0.0.1:8000/api";
+const isLocalStaticServer = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && 
+                            (window.location.port === '5500' || window.location.port === '3000' || window.location.port === '5173');
+const API_ROOT = isLocalStaticServer ? "http://127.0.0.1:8000/api" : "/api";
 
 // Available page fragments
 const PAGES = {
@@ -279,26 +281,70 @@ function initSignupPage() {
 // INTERACTIVE AI CHAT PROXY
 // ============================================
 
-function initChatPage() {
+let currentChatToolId = 1;
+
+async function initChatPage() {
     const storedTool = sessionStorage.getItem("active_chat_tool");
-    const tool = storedTool ? JSON.parse(storedTool) : null;
+    let tool = storedTool ? JSON.parse(storedTool) : null;
 
     const noticeAvailable = document.getElementById("chat-availability-notice");
     const noticeOffline = document.getElementById("chat-offline-notice");
     const chatLayout = document.getElementById("chat-layout");
     const officialLink = document.getElementById("chat-official-link");
+    const toolSelector = document.getElementById("chat-tool-selector");
 
     if (!tool) {
-        // Fallback default tool if opened directly
-        setupChatHeader({ id: 1, name: "ChatGPT", api_available: "yes", platform: "OpenAI API" });
-    } else if (tool.api_available === "no") {
+        tool = { id: 1, name: "ChatGPT", api_available: "yes", platform: "OpenAI API" };
+    }
+
+    currentChatToolId = tool.id;
+
+    if (tool.api_available === "no") {
         if (noticeAvailable) noticeAvailable.classList.add("hidden");
         if (chatLayout) chatLayout.classList.add("hidden");
         if (noticeOffline) noticeOffline.classList.remove("hidden");
         if (officialLink) officialLink.href = tool.website;
         return;
     } else {
+        if (noticeAvailable) noticeAvailable.classList.remove("hidden");
+        if (chatLayout) chatLayout.classList.remove("hidden");
+        if (noticeOffline) noticeOffline.classList.add("hidden");
         setupChatHeader(tool);
+    }
+
+    // Populate tool switcher dropdown
+    if (toolSelector) {
+        try {
+            const res = await fetch(`${API_ROOT}/tools`);
+            if (res.ok) {
+                const tools = await res.json();
+                const interactiveTools = tools.filter(t => t.api_available !== "no");
+                toolSelector.innerHTML = interactiveTools.map(t => 
+                    `<option value="${t.id}" ${t.id === tool.id ? 'selected' : ''}>${t.name}</option>`
+                ).join("");
+
+                toolSelector.onchange = () => {
+                    const selectedId = parseInt(toolSelector.value);
+                    const selectedTool = interactiveTools.find(t => t.id === selectedId);
+                    if (selectedTool) {
+                        currentChatToolId = selectedTool.id;
+                        sessionStorage.setItem("active_chat_tool", JSON.stringify(selectedTool));
+                        setupChatHeader(selectedTool);
+                        chatMessagesHistory = [];
+                        const msgBox = document.getElementById("chat-messages");
+                        if (msgBox) {
+                            msgBox.innerHTML = `
+                                <div class="chat-msg ai">
+                                    <p>Switched to <strong>${selectedTool.name}</strong>. How can I assist you with this tool?</p>
+                                </div>
+                            `;
+                        }
+                    }
+                };
+            }
+        } catch (e) {
+            console.error("Could not load tool selector in chat:", e);
+        }
     }
 
     chatMessagesHistory = [];
@@ -307,10 +353,10 @@ function initChatPage() {
     const input = document.getElementById("chat-input");
     const clearBtn = document.getElementById("btn-clear-chat");
 
-    if (sendBtn) sendBtn.onclick = () => handleSendChatMessage(tool ? tool.id : 1);
+    if (sendBtn) sendBtn.onclick = () => handleSendChatMessage(currentChatToolId);
     if (input) {
         input.onkeydown = (e) => {
-            if (e.key === "Enter") handleSendChatMessage(tool ? tool.id : 1);
+            if (e.key === "Enter") handleSendChatMessage(currentChatToolId);
         };
     }
     if (clearBtn) {

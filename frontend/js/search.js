@@ -2,7 +2,7 @@
    AI NAVIGATOR — Backend API Integration
    ============================================ */
 
-const API_BASE_URL = "http://127.0.0.1:8000/api";
+const API_BASE_URL = typeof API_ROOT !== "undefined" ? API_ROOT : "/api";
 
 /**
  * Helper to get authorization headers if a user is logged in
@@ -266,6 +266,25 @@ function renderComparison(tools, summaryText) {
     if (summary) {
         summary.innerHTML = (summaryText || "").replace(/\n/g, "<br>");
     }
+
+    const resetBtn = document.getElementById("btn-reset-compare");
+    if (resetBtn) {
+        resetBtn.onclick = () => {
+            if (results) results.classList.add("hidden");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+    }
+
+    const backBtn = document.getElementById("btn-back-dashboard");
+    if (backBtn) {
+        backBtn.onclick = () => {
+            if (window.currentResults) {
+                navigateTo("dashboard");
+            } else {
+                navigateTo("home");
+            }
+        };
+    }
 }
 
 // ============================================
@@ -364,24 +383,57 @@ document.addEventListener("DOMContentLoaded", () => {
 /**
  * Handle populate logic for comparison cards
  */
-function populateCompareOptions() {
+async function populateCompareOptions() {
     const container = document.getElementById("compare-tool-options");
     const countLabel = document.getElementById("compare-count-label");
     const runBtn = document.getElementById("btn-run-compare");
     
-    if (!container || !window.currentResults) return;
+    if (!container) return;
 
-    const allTools = [
-        window.currentResults.best_match,
-        ...window.currentResults.alternatives
-    ];
+    let toolCards = [];
+    if (window.currentResults && window.currentResults.best_match) {
+        const all = [
+            window.currentResults.best_match,
+            ...window.currentResults.alternatives
+        ];
+        toolCards = all.map(item => ({
+            id: item.tool.id,
+            name: item.tool.name,
+            sub: `${item.overall_score}% match`
+        }));
+    } else {
+        container.innerHTML = '<div class="spinner"></div>';
+        try {
+            const res = await fetch(`${API_BASE_URL}/tools`);
+            if (res.ok) {
+                const tools = await res.json();
+                toolCards = tools.map(t => ({
+                    id: t.id,
+                    name: t.name,
+                    sub: `${formatLabel(t.category)} • ${formatLabel(t.pricing)}`
+                }));
+            }
+        } catch (e) {
+            console.error("Error loading tools for comparison:", e);
+        }
+    }
+
+    if (!toolCards.length) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <h3>No tools available for comparison</h3>
+                <p>Run a search first or make sure active AI tools are registered in the database.</p>
+            </div>
+        `;
+        return;
+    }
 
     let selectedIds = new Set();
 
-    container.innerHTML = allTools.map(item => `
-        <div class="compare-tool-option" data-tool-id="${item.tool.id}">
-            <h4>${item.tool.name}</h4>
-            <p>${item.overall_score}% match</p>
+    container.innerHTML = toolCards.map(item => `
+        <div class="compare-tool-option" data-tool-id="${item.id}">
+            <h4>${item.name}</h4>
+            <p>${item.sub}</p>
         </div>
     `).join("");
 

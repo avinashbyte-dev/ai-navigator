@@ -1,6 +1,18 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
+import os
+import shutil
 from config import settings
+
+# If on Vercel, ensure seed db is copied to /tmp if not already present
+if os.getenv("VERCEL"):
+    tmp_db_file = "/tmp/ai_navigator.db"
+    src_db_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ai_navigator.db")
+    if not os.path.exists(tmp_db_file) and os.path.exists(src_db_file):
+        try:
+            shutil.copyfile(src_db_file, tmp_db_file)
+        except Exception:
+            pass
 
 connect_args = {}
 if settings.DATABASE_URL.startswith("sqlite"):

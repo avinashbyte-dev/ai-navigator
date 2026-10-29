@@ -24,7 +24,8 @@ class Settings:
 
     # ---- Database ----
     # Save the database in the parent folder to prevent auto-reloader loops
-    DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///../ai_navigator.db")
+    _default_db = "sqlite:////tmp/ai_navigator.db" if os.getenv("VERCEL") else "sqlite:///./ai_navigator.db"
+    DATABASE_URL: str = os.getenv("DATABASE_URL", _default_db)
 
     # ---- JWT Authentication ----
     SECRET_KEY: str = os.getenv("SECRET_KEY", "fallback-secret-key-change-in-production")
